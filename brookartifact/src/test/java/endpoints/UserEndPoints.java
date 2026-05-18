@@ -13,6 +13,8 @@ import payload.User;
 public class UserEndPoints {
 
 	
+	//public static String token;
+	
 	public static Response PostBooking(User payload)
 	{
 		Response res = given()
@@ -29,24 +31,66 @@ public class UserEndPoints {
        }
 	
 	
-	
-	
-/*	public static String createToken()
+	public static Response GetBooking(int id)
 	{
+		Response res=given()
+		.pathParam("id", id)
+		.when()
+		.get(Routes.get_ID_URL);
+		
+		return res;
+		
+		
+	}
+	
+	
+	public static Response updateBooking(User payload,int id)
+	{
+		
+		//String token =login.createToken();
 		Response res = given()
-                .contentType("application/json")
-                .body("{\"username\":\"admin\",\"password\":\"password123\"}")
-        .when()
-                .post("https://restful-booker.herokuapp.com/auth");
+	            .contentType(ContentType.JSON)
+	            .pathParam("id", id)
+	            .header("Cookie", "token=" + login.createToken()) 
+	            .body(payload)
+	    .when()
+	            .put(Routes.put_URL);               
 
-       String token=res.jsonPath().getString("token");
-       // return token;
-        
-        System.out.println("token beig passed--------"+  token);
-		return token;
+	    return res;
+	}
+	
+	
+	public static Response patchBooking(User payload,int id)
+	{
+		
+		//String token =login.createToken();
+		Response res = given()
+	            .contentType(ContentType.JSON)
+	            .pathParam("id", id)
+	            .header("Cookie", "token=" + login.createToken()) 
+	            .body(payload)
+	    .when()
+	            .patch(Routes.patch_URL);               
 
+	    return res;
+	}
+	
+	
+	public static Response deleteBooking(int id)
+	{
+		
+		//String token =login.createToken();
+		Response res = given()
+	            .contentType(ContentType.JSON)
+	            .pathParam("id", id)
+	            .header("Cookie", "token=" + login.createToken()) 
+	            
+	    .when()
+	            .delete(Routes.delete_URL);               
 
-	}*/
+	    return res;
+	}
+	
 	
 	
 	
